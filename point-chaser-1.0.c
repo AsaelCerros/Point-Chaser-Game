@@ -5,6 +5,7 @@
 #include <conio.h> 
 
 void borrar(int x, int x1, int y, int y1);
+void portal();
 void marcox();
 int borrar_x(int x);
 int lobox(int x, int x1);
@@ -18,9 +19,9 @@ int main(int argc, char const *argv[])
 	int *b;
 	
 	srand(time(0));
-	x=rand() % 80;
+	x=rand() % 79;
 	y=rand() % 24;
-	x1=rand() % 80;
+	x1=rand() % 79;
 	y1=rand() % 24;
 	
 	system("cls");
@@ -28,6 +29,7 @@ int main(int argc, char const *argv[])
 	gotoxy(x1, y1);
 	printf("X");
 	
+	portal();
 	gotoxy(x, y);
 	setcolor(2);
 	printf("%c", 2);
@@ -58,8 +60,6 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    printf("X");
-	    
 	    x1=lobox(x, x1);
 	    y1=loboy(y, y1);
 	    gotoxy(x1, y1);
@@ -153,4 +153,19 @@ int loboy(int y, int y1){
 		y1--;
 	}
 	return y1;
+}
+void portal()
+{
+  int x,y;
+  setcolor(5);
+  x=rand() % 79;
+  y=rand() % 24;
+  gotoxy(x,y);
+  printf("%c",176);
+  
+  setcolor(5);
+  x=rand() % 79;
+  y=rand() % 24;
+  gotoxy(x,y);
+  printf("%c",176);		
 }
