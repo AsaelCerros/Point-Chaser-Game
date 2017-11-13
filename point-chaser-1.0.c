@@ -69,7 +69,7 @@ int main(int argc, char const *argv[])
 	    gotoxy(x, y);
 	    printf("%c", 2);
 	
-	}while(r!='e');
+	}while(x!=x1 || y!=y1);
 
 	return 0;
 }
