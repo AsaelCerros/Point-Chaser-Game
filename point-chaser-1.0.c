@@ -36,8 +36,8 @@ int main(int argc, char const *argv[])
 	marcox();
 	do
 	{
-		r=getche();
-		setcolor(4);
+	    r=getche();
+	    setcolor(4);
 	    gotoxy(x1, y1);
  	    printf("X");
 	    
@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
 			case 'D':
 			case 'd': x++; break;
 		}
-		setcolor(4);
+	    setcolor(4);
 	    printf("X");
 	    
 	    x1=lobox(x, x1);
