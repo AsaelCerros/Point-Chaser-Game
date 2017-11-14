@@ -18,6 +18,8 @@ int main(int argc, char const *argv[])
 	int obj[3];
 	int *b;
 	
+	do
+	{
 	srand(time(0));
 	x=rand() % 79;
 	y=rand() % 24;
@@ -70,7 +72,9 @@ int main(int argc, char const *argv[])
 	    printf("%c", 2);
 	
 	}while(x!=x1 || y!=y1);
-
+	printf("Desea reiniciar el juego(Y/n)");
+	r=getche();
+   }while(r!='n');
 	return 0;
 }
 void gotoxy(int x, int y)
