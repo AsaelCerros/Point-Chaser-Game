@@ -5,7 +5,7 @@
 #include <conio.h> 
 
 void borrar(int x, int x1, int y, int y1);
-void portal();
+int objetos(int x, int y, int xp1, int yp1, int xp2, int yp2);
 void marcox();
 int borrar_x(int x);
 int lobox(int x, int x1);
@@ -14,41 +14,41 @@ void gotoxy(int x, int y);
 void setcolor(int c);
 int main(int argc, char const *argv[])
 {
-	int y, x, x1, y1, r;
+	int y, x, x1, y1, xp1, yp1, yp2, xp2, r;
 	int obj[3];
-	int *b;
-	
-	do
-	{
+	int b;
+	int l;
+	do{
 	srand(time(0));
 	x=rand() % 79;
 	y=rand() % 24;
 	x1=rand() % 79;
 	y1=rand() % 24;
-	
+	xp1=rand() % 75;
+	yp1=rand() % 22;
+	xp2=rand() % 75;
+	yp2=rand() % 22;	
 	system("cls");
 	setcolor(4);
 	gotoxy(x1, y1);
 	printf("X");
-	
-	portal();
 	gotoxy(x, y);
 	setcolor(2);
 	printf("%c", 2);
-	
+	gotoxy(xp1, yp1);
+	printf("°");
+	gotoxy(xp2, yp2);
+	printf("°");
 	borrar(x, x1, y, y1);
 	marcox();
-	do
-	{
+	do{
 	    r=getche();
 	    setcolor(4);
 	    gotoxy(x1, y1);
  	    printf("X");
-	    
 	    gotoxy(x, y);
 	    setcolor(2);
 	    printf("%c", 2);
-	    
 	    borrar(x, x1, y, y1);
 	    switch(r)
 		{
@@ -62,15 +62,93 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    x1=lobox(x, x1);
+	    /*x1=lobox(x, x1);
 	    y1=loboy(y, y1);
+	    b=portal(x,y, xp1, yp1, xp2, yp2);*/
+	    if(x1==xp1 && y1==yp1){
+	    	switch(b){
+	    		case 'a':
+	    			x1=xp2+1;
+	    			y1=yp2; break;
+	    		case 'b':
+	    			x1=xp2;
+	    			y1=yp2+1; break;
+	    		case 'c':
+	    			x1==xp2-1;
+	    			y1=yp2; break;
+	    		case 'd':
+	    			x1=xp2;
+	    			y1=yp2-1; break;
+	    		default:
+	    			x1=xp2;
+	    			y1=yp2; break;
+			}
+		}
 	    gotoxy(x1, y1);
 	    printf("X");
-	    
+	    b=objetos(x, y, xp1, yp1, xp2, yp2);
 	    setcolor(2);
-	    gotoxy(x, y);
+	    if(x==xp1 && y==yp1){
+	    	switch(b){
+	    		case 'a':
+	    			x=xp2+1;
+	    			y=yp2; break;
+	    		case 'b':
+	    			x=xp2;
+	    			y=yp2+1; break;
+	    		case 'c':
+	    			x==xp2-1;
+	    			y=yp2; break;
+	    		case 'd':
+	    			x=xp2;
+	    			y=yp2-1; break;
+	    		default:
+	    			x=xp2;
+	    			y=yp2; break;
+			}
+		}
+		gotoxy(x, y);
 	    printf("%c", 2);
-	
+		if(x==xp2 && y==yp2){
+	    	switch(b){
+	    		case 'a':
+	    			x=xp1+1;
+	    			y=yp1; break;
+	    		case 'b':
+	    			x=xp1;
+	    			y=yp1+1; break;
+	    		case 'c':
+	    			x==xp1-1;
+	    			y=yp1; break;
+	    		case 'd':
+	    			x=xp1;
+	    			y=yp1-1; break;
+	    		default:
+	    			x=xp1;
+	    			y=yp1; break;
+			}
+		}
+		if(x<2){
+			x++;
+		}
+		if(x>79){
+			x--;
+		}
+		if(y<2){
+			y++;
+		}
+		if(y>23){
+			y--;
+		}
+		gotoxy(x, y);
+		setcolor(4);
+	    printf("%c", 2);
+	    gotoxy(xp1, yp1);
+	    printf("°");
+	    setcolor(2);
+	    gotoxy(xp2, yp2);
+	    printf("°");
+	    printf("%c", 0);
 	}while(x!=x1 || y!=y1);
 	printf("Desea reiniciar el juego(Y/n)");
 	r=getche();
@@ -125,13 +203,7 @@ void borrar(int x, int x1, int y, int y1){
 	gotoxy(x1, y1);
 	printf("%c", 0);
 	
-	gotoxy(x1-1, y1);
-	printf("%c", 0);
-	
-	gotoxy(x1, y1-1);
-	printf("%c", 0);
-	
-	gotoxy(x1, y1+1);
+	gotoxy(x1+1, y1);
 	printf("%c", 0);
 }
 int lobox(int x, int x1){
@@ -158,18 +230,31 @@ int loboy(int y, int y1){
 	}
 	return y1;
 }
-void portal()
-{
-  int x,y;
-  setcolor(5);
-  x=rand() % 79;
-  y=rand() % 24;
-  gotoxy(x,y);
-  printf("%c",176);
-  
-  setcolor(5);
-  x=rand() % 79;
-  y=rand() % 24;
-  gotoxy(x,y);
-  printf("%c",176);		
+int objetos(int x, int y, int xp1, int yp1, int xp2, int yp2){
+	char b;
+	if(x==xp1-1 && y==yp1){
+		b='a';
+	}
+	if(x==xp1+1 && y==yp1){
+		b='c';
+	}
+	if(x==xp1 && y==yp1-1){
+		b='b';
+	}
+	if(x==xp1 && y==yp1+1){
+		b='d';
+	}
+	if(x==xp2-1 && y==yp2){
+		b='a';
+	}
+	if(x==xp2+1 && y==yp2){
+		b='c';
+	}
+	if(x==xp2 && y==yp2-1){
+		b='b';
+	}
+	if(x==xp2 && y==yp2+1){
+		b='d';
+	}
+	return b;
 }
