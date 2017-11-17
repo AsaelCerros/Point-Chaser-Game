@@ -5,9 +5,7 @@
 #include <conio.h> 
 
 void borrar(int x, int x1, int y, int y1);
-int objetos(int x, int y, int xp1, int yp1, int xp2, int yp2);
 void marcox();
-int borrar_x(int x);
 int lobox(int x, int x1);
 int loboy(int y, int y1);
 void gotoxy(int x, int y);
@@ -62,72 +60,14 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    /*x1=lobox(x, x1);
+	    x1=lobox(x, x1);
 	    y1=loboy(y, y1);
-	    b=portal(x,y, xp1, yp1, xp2, yp2);*/
-	    if(x1==xp1 && y1==yp1){
-	    	switch(b){
-	    		case 'a':
-	    			x1=xp2+1;
-	    			y1=yp2; break;
-	    		case 'b':
-	    			x1=xp2;
-	    			y1=yp2+1; break;
-	    		case 'c':
-	    			x1==xp2-1;
-	    			y1=yp2; break;
-	    		case 'd':
-	    			x1=xp2;
-	    			y1=yp2-1; break;
-	    		default:
-	    			x1=xp2;
-	    			y1=yp2; break;
-			}
-		}
 	    gotoxy(x1, y1);
 	    printf("X");
-	    b=objetos(x, y, xp1, yp1, xp2, yp2);
 	    setcolor(2);
-	    if(x==xp1 && y==yp1){
-	    	switch(b){
-	    		case 'a':
-	    			x=xp2+1;
-	    			y=yp2; break;
-	    		case 'b':
-	    			x=xp2;
-	    			y=yp2+1; break;
-	    		case 'c':
-	    			x==xp2-1;
-	    			y=yp2; break;
-	    		case 'd':
-	    			x=xp2;
-	    			y=yp2-1; break;
-	    		default:
-	    			x=xp2;
-	    			y=yp2; break;
-			}
-		}
 		gotoxy(x, y);
 	    printf("%c", 2);
-		if(x==xp2 && y==yp2){
-	    	switch(b){
-	    		case 'a':
-	    			x=xp1+1;
-	    			y=yp1; break;
-	    		case 'b':
-	    			x=xp1;
-	    			y=yp1+1; break;
-	    		case 'c':
-	    			x==xp1-1;
-	    			y=yp1; break;
-	    		case 'd':
-	    			x=xp1;
-	    			y=yp1-1; break;
-	    		default:
-	    			x=xp1;
-	    			y=yp1; break;
-			}
-		}
+	
 		if(x<2){
 			x++;
 		}
@@ -141,11 +81,11 @@ int main(int argc, char const *argv[])
 			y--;
 		}
 		gotoxy(x, y);
-		setcolor(4);
+		setcolor(2);
 	    printf("%c", 2);
 	    gotoxy(xp1, yp1);
 	    printf("°");
-	    setcolor(2);
+	    setcolor(7);
 	    gotoxy(xp2, yp2);
 	    printf("°");
 	    printf("%c", 0);
@@ -229,32 +169,4 @@ int loboy(int y, int y1){
 		y1--;
 	}
 	return y1;
-}
-int objetos(int x, int y, int xp1, int yp1, int xp2, int yp2){
-	char b;
-	if(x==xp1-1 && y==yp1){
-		b='a';
-	}
-	if(x==xp1+1 && y==yp1){
-		b='c';
-	}
-	if(x==xp1 && y==yp1-1){
-		b='b';
-	}
-	if(x==xp1 && y==yp1+1){
-		b='d';
-	}
-	if(x==xp2-1 && y==yp2){
-		b='a';
-	}
-	if(x==xp2+1 && y==yp2){
-		b='c';
-	}
-	if(x==xp2 && y==yp2-1){
-		b='b';
-	}
-	if(x==xp2 && y==yp2+1){
-		b='d';
-	}
-	return b;
 }
