@@ -66,8 +66,8 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    /*x1=lobox(x, x1);
-	    y1=loboy(y, y1);*/
+	    x1=lobox(x, x1);
+	    y1=loboy(y, y1);
 	    gotoxy(x1, y1);
 	    printf("X");
 	    setcolor(2);
@@ -106,6 +106,7 @@ int main(int argc, char const *argv[])
 		printf("@");
 	}
 	}while(x!=x1||y!=y1);
+	system("cls");
 	printf("usted perdioXDXDXDXDXD\nDesea reiniciar el juego(Y/n)");
 	r=getche();
 	salida:
@@ -211,6 +212,8 @@ void pared_tangible(int *x_pared, int y_pared[6]){
 	int i;
 	*x_pared=rand()%70;
 	y_pared[0]=rand()%14;
+	gotoxy(*x_pared, y_pared[0]);
+	printf("@");
 	for(i=1;i<6;i++){
 		y_pared[i]=y_pared[0]+i;
 		gotoxy(*x_pared, y_pared[i]);
@@ -219,7 +222,7 @@ void pared_tangible(int *x_pared, int y_pared[6]){
 }
 int tocar(int x, int y, int x_pared, int y_pared[6]){
 	int i;
-	for(i=0;i<6;i++){
+	for(i=0;i<7;i++){
 		if(x==x_pared && y==y_pared[i])
 		x--;
 		}
