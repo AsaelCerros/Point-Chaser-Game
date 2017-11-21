@@ -3,7 +3,8 @@
 #include <windows.h>
 #include <time.h>
 #include <conio.h>
-void pared_tangible(int *x_pared, int *y_pared);
+int tocar(int x, int y, int x_pared, int y_pared[6]);
+void pared_tangible(int *x_pared, int y_pared[6]);
 void borrar(int x, int x1, int y, int y1);
 void portales(int *x,int *y,int *x1,int *y1,int xp1, int yp1,int xp2, int yp2); 
 void marcox();
@@ -11,11 +12,10 @@ int lobox(int x, int x1);
 int loboy(int y, int y1);
 void gotoxy(int x, int y);
 void setcolor(int c);
-void pared(int *x_pared, int *y_pared);
 int main(int argc, char const *argv[])
 {
-	int y, x, x1, y1, xp1, yp1, yp2, xp2, r;
-	int v1,v2,x_pared, y_pared;
+	int y, x, x1, y1, xp1, yp1, yp2, xp2, r, i;
+	int v1,v2,x_pared, y_pared[6];
 	do{
 	srand(time(0));
 	x=rand() % 79;
@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
 	setcolor(6);
 	gotoxy(v1,v2);
 	printf("+");
-	pared_tangible(&x_pared, &y_pared);
+	pared_tangible(&x_pared, y_pared);
 	do{
 	    r=getche();
 	    setcolor(4);
@@ -87,6 +87,7 @@ int main(int argc, char const *argv[])
 		if(y>23){
 			y--;
 		}
+		x=tocar(x, y, x_pared, y_pared);
 		gotoxy(x, y);
 		setcolor(2);
 	    printf("%c", 2);
@@ -99,6 +100,11 @@ int main(int argc, char const *argv[])
 	    if(x==v1&&y==v2){
 	    	goto salida;
 		}
+		for(i=1;i<6;i++){
+		y_pared[i]=y_pared[0]+i;
+		gotoxy(x_pared, y_pared[i]);
+		printf("@");
+	}
 	}while(x!=x1||y!=y1);
 	printf("usted perdioXDXDXDXDXD\nDesea reiniciar el juego(Y/n)");
 	r=getche();
@@ -201,25 +207,21 @@ void portales(int *x,int *y,int *x1,int *y1,int xp1, int yp1,int xp2, int yp2){
 	
 	
 }
-void pared(int *x_pared, int *y_pared){
-	int i, x, y[6];
-	*x_pared=rand()% 70;
-	y[0]=rand()% 20;
-	 for(i=0;i<6;i++){
-	 	y[i]=y[0]+i;
-	 	gotoxy(*x_pared, y[i]);
-	 	printf("&");
-	 }
-	 *y_pared=y[6];
-}
-void pared_tangible(int *y_pared, int *x_pared){
-	int y, i;
-	y=rand()%14;
+void pared_tangible(int *x_pared, int y_pared[6]){
+	int i;
 	*x_pared=rand()%70;
-	*y_pared=y;
+	y_pared[0]=rand()%14;
 	for(i=1;i<6;i++){
-		*y_pared=*y_pared+1;
-		gotoxy(*x_pared, *y_pared);
+		y_pared[i]=y_pared[0]+i;
+		gotoxy(*x_pared, y_pared[i]);
 		printf("@");
 	}
+}
+int tocar(int x, int y, int x_pared, int y_pared[6]){
+	int i;
+	for(i=0;i<6;i++){
+		if(x==x_pared && y==y_pared[i])
+		x--;
+		}
+		return x;
 }
