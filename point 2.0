@@ -3,7 +3,8 @@
 #include <windows.h>
 #include <time.h>
 #include <conio.h>
-int tocar(int x, int y, int x_pared, int y_pared[6]);
+int tocarx(int x, int y, int x_pared, int y_pared[6],char r);
+int tocary(int x, int y, int x_pared, int y_pared[6],char r);
 void pared_tangible(int *x_pared, int y_pared[6]);
 void borrar(int x, int x1, int y, int y1);
 void portales(int *x,int *y,int *x1,int *y1,int xp1, int yp1,int xp2, int yp2); 
@@ -14,9 +15,10 @@ void gotoxy(int x, int y);
 void setcolor(int c);
 int main(int argc, char const *argv[])
 {
-	int y, x, x1, y1, xp1, yp1, yp2, xp2, r, i;
+	int y, x, x1, y1, xp1, yp1, yp2, xp2, r, i,scr=0;
 	int v1,v2,x_pared, y_pared[6];
 	do{
+		inicio:
 	srand(time(0));
 	x=rand() % 79;
 	y=rand() % 24;
@@ -66,9 +68,9 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    x1=lobox(x, x1);
+	    /*x1=lobox(x, x1);
 	    y1=loboy(y, y1);
-	    gotoxy(x1, y1);
+	    gotoxy(x1, y1);*/
 	    printf("X");
 	    setcolor(2);
 	    portales(&x,&y,&x1,&y1,xp1,yp1,xp2,yp2);
@@ -87,7 +89,8 @@ int main(int argc, char const *argv[])
 		if(y>23){
 			y--;
 		}
-		x=tocar(x, y, x_pared, y_pared);
+		x=tocarx(x, y, x_pared, y_pared,r);
+		y=tocary(x, y, x_pared, y_pared,r);
 		gotoxy(x, y);
 		setcolor(2);
 	    printf("%c", 2);
@@ -98,7 +101,12 @@ int main(int argc, char const *argv[])
 	    printf("#");
 	    printf("%c", 0);
 	    if(x==v1&&y==v2){
-	    	goto salida;
+	    	system("cls");
+		  scr++;
+		  printf("+1 punto iniciar siguiente LVL %d\n",scr+1);
+		  system("pause");
+		  goto inicio;
+	    	
 		}
 		for(i=1;i<6;i++){
 		y_pared[i]=y_pared[0]+i;
@@ -106,11 +114,11 @@ int main(int argc, char const *argv[])
 		printf("@");
 	}
 	}while(x!=x1||y!=y1);
+	system("pause");
 	system("cls");
-	printf("usted perdioXDXDXDXDXD\nDesea reiniciar el juego(Y/n)");
+	printf("usted perdioXDXDXDXDXD puntuacion mas alta %d\nDesea reiniciar el juego(Y/n)",scr);
 	r=getche();
-	salida:
-		printf("ganastessssss\ndesea cntinuar?");
+	
    }while(r!='n');
 	return 0;
 }
@@ -193,17 +201,17 @@ void portales(int *x,int *y,int *x1,int *y1,int xp1, int yp1,int xp2, int yp2){
 		*x=xp2;
 		*y=yp2;
 	}
-	if(*x==xp2&&*y==yp2){
+	else if(*x==xp2&&*y==yp2){
 		*x=xp1;
 		*y=yp1;
 	}
-	if(*x1==xp2&&*y1==yp2){
+	else if(*x1==xp2&&*y1==yp2){
 		*x1=xp1;
 		*y1=yp1;
 	}
-	if(*x1==xp2&&*y1==yp2){
-		*x1=xp1;
-		*y1=yp1;
+	else if(*x1==xp1&&*y1==yp1){
+		*x1=xp2;
+		*y1=yp2;
 	}
 	
 	
@@ -220,11 +228,34 @@ void pared_tangible(int *x_pared, int y_pared[6]){
 		printf("@");
 	}
 }
-int tocar(int x, int y, int x_pared, int y_pared[6]){
+int tocarx(int x, int y, int x_pared, int y_pared[6],char r){
 	int i;
 	for(i=0;i<7;i++){
 		if(x==x_pared && y==y_pared[i])
-		x--;
+		switch(r){
+		
+		  case 'd':
+		  	    x--;
+		  	    break;
+		  case 'a':
+		  	    x++;
+				break;
+	}
 		}
 		return x;
+}
+int tocary(int x, int y, int x_pared, int y_pared[6],char r){
+	int i;
+	for(i=0;i<7;i++){
+		if(x==x_pared && y==y_pared[i])
+		switch(r){
+		  case 's':
+		  	    y--;
+		  	    break;
+		  case 'w':
+		        y++;
+			    break;	
+	}
+		}
+		return y;
 }
