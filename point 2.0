@@ -7,6 +7,7 @@ int tocarx(int x, int y, int x_pared, int y_pared[6],char r);
 int tocary(int x, int y, int x_pared, int y_pared[6],char r);
 void pared_tangible(int *x_pared, int y_pared[6]);
 void borrar(int x, int x1, int y, int y1);
+void pistol(int x, int y, int pistola[2]);
 void portales(int *x,int *y,int *x1,int *y1,int xp1, int yp1,int xp2, int yp2); 
 void marcox();
 int lobox(int x, int x1);
@@ -16,10 +17,12 @@ void setcolor(int c);
 int main(int argc, char const *argv[])
 {
 	int y, x, x1, y1, xp1, yp1, yp2, xp2, r, i,scr=0;
-	int v1,v2,x_pared, y_pared[6];
+	int v1,v2,x_pared, y_pared[6], pistola[2];
 	do{
 		inicio:
 	srand(time(0));
+	pistola[0]=rand() % 79;
+	pistola[1]=rand() % 24;
 	x=rand() % 79;
 	y=rand() % 24;
 	x1=rand() % 79;
@@ -48,7 +51,7 @@ int main(int argc, char const *argv[])
 	printf("+");
 	pared_tangible(&x_pared, y_pared);
 	do{
-	    r=getche();
+	    r=getch();
 	    setcolor(4);
 	    gotoxy(x1, y1);
  	    printf("X");
@@ -68,10 +71,10 @@ int main(int argc, char const *argv[])
 			case 'd': x++; break;
 		}
 	    setcolor(4);
-	    /*x1=lobox(x, x1);
-	    y1=loboy(y, y1);
-	    gotoxy(x1, y1);*/
-	    printf("X");
+	    //x1=lobox(x, x1);
+	    //y1=loboy(y, y1);
+	    gotoxy(x1, y1);
+	    //printf("X");
 	    setcolor(2);
 	    portales(&x,&y,&x1,&y1,xp1,yp1,xp2,yp2);
 		gotoxy(x, y);
@@ -89,6 +92,7 @@ int main(int argc, char const *argv[])
 		if(y>23){
 			y--;
 		}
+		pistol(x, y, pistola);
 		x=tocarx(x, y, x_pared, y_pared,r);
 		y=tocary(x, y, x_pared, y_pared,r);
 		gotoxy(x, y);
@@ -258,4 +262,16 @@ int tocary(int x, int y, int x_pared, int y_pared[6],char r){
 	}
 		}
 		return y;
+}
+void pistol(int x, int y, int pistola[2]){
+	int i;
+	gotoxy(pistola[0], pistola[1]);
+	printf("*");
+	if(x==pistola[0] && y==pistola[1]){
+	for(i=1;i<40;i++){
+		gotoxy(x+i, y);
+		setcolor(i-1);
+		printf("#");
+		Sleep(100);
+	}}
 }
