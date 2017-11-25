@@ -66,6 +66,7 @@ int main(int argc, char const *argv[])
 		system("cls");
 		printf("Puntuaciones\nJugador1 1900\nJugador2 1231\n");/*Muestra las puntuaciones TEST*/
 		system("pause");
+		system("cls");	
 		break;
 		case 4:
 		exit(EXIT_SUCCESS);/*Sale del juego*/
