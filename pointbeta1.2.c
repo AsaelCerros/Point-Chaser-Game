@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#pragma comment(lib, "winmm.lib")
 #define LARGOMARCO 24 
 #define ANCHOMARCO 80
 void marco();
@@ -15,6 +16,7 @@ int main(int argc, char const *argv[])
 	int menu, avatar_opc, avatar;
 	/*Menu del juego*/
 	do{
+	PlaySound(TEXT("Guiles_theme_download.wav"), 0,SND_ASYNC);	
 	printf("1.-Iniciar juego\n2.-Cambiar skin\n3.-Puntuaciones\n4.-Salir\n");
 	scanf("%i",&menu);
 	switch(menu)
