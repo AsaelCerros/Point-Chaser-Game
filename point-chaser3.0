@@ -21,7 +21,7 @@ void scoreCrea(int scrm);
 void scoreMuestra(void);
 int main(int argc, char const *argv[])
 {
-	PlaySound(TEXT("Guiles_theme_download.wav"), 0,SND_ASYNC);
+	PlaySound(TEXT("Guiles_theme_download.wav"), 0,SND_ASYNC);//cancion en la misma carpeta del programa 
 	int y, x, x1, y1, xp1, yp1, yp2, xp2, r, i,scr=0,scrm=0;
 	int v1,v2,x_pared, y_pared[6];
 	char rank;
