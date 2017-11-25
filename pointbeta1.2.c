@@ -14,6 +14,7 @@ int main(int argc, char const *argv[])
 	char movcarita;
 	int menu, avatar_opc, avatar;
 	/*Menu del juego*/
+	do{
 	printf("1.-Iniciar juego\n2.-Cambiar skin\n3.-Puntuaciones\n4.-Salir\n");
 	scanf("%i",&menu);
 	switch(menu)
@@ -76,6 +77,7 @@ int main(int argc, char const *argv[])
 
 
 	}
+        }while(menu!=1);	
 	start:
 	marco();
 	/*Generacion del jugador de forma aleatoria*/
