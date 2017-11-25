@@ -74,7 +74,7 @@ int main(int argc, char const *argv[])
 		exit(EXIT_SUCCESS);/*Sale del juego*/
 		break;
 		default:
-		printf("Seleccione una opcion valida");
+		printf("Seleccione una opcion valida\n");
 		break;
 
 
