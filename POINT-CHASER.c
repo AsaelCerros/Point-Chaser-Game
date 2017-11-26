@@ -43,6 +43,7 @@ int main(int argc, char const *argv[])
 	setcolor(10);
 	printf("POINT CHASER %c\n", 2);
 	setcolor(7);
+	do{
 	printf("1.-Iniciar juego\n2.-Cambiar skin\n3.-Puntuaciones\n4.-Salir\n");
 	scanf("%i",&menu);
 	switch(menu)
@@ -109,7 +110,7 @@ int main(int argc, char const *argv[])
 		break;
 
 	}
-
+        }while(menu!=1);
 	do{
 		inicio:
 	srand(time(0));//Genera los portales y el punto de victoria en una posicion aleatoria	
